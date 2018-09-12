@@ -16,15 +16,5 @@ namespace Automation
         {
             t.driver.Title.ShouldBe(screenUrl);
         } 
-
-        //public static ValidateElementIsPresent(IWebDriver driver, By element)
-        //{
-        //    driver.FindElement(element).Displayed.ShouldBe(true);
-        //}
-
-        //public static ValidateTextInElement(IWebDriver driver, By element, String text)
-        //{
-        //    driver.FindElement(element).Text.ShouldBe(text);
-        //} 
     }
 }
