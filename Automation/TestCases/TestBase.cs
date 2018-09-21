@@ -9,14 +9,14 @@ namespace Automation.PageObjects
     public class TestBase
     {
         protected IWebDriver driver;
-        public string Url = "http://google.com/";
+        public string Url = "https://swappa.com/";
         [SetUp]
         public void SetUp()
         {
             TestContext.Progress.WriteLine("Driver Started");
             driver = new ChromeDriver();
             driver.Url = Url;
-            //driver.Manage().Window.Maximize();
+            driver.Manage().Window.Maximize();
         }
 
         [TearDown]
