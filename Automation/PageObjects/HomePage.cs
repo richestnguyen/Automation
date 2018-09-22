@@ -17,12 +17,13 @@ namespace Automation.PageObjects
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
+
         }
 
-        [FindsBy(How = How.XPath, Using = @"//*[@id=""lst-ib""]")]
+        [FindsBy(How = How.XPath, Using = @"//*[@id=""id_q""]")]
         public IWebElement SearhTextBox;
 
-        [FindsBy(How = How.XPath, Using = @".//*[@id='tsf']/div[2]/div[3]/center/input[1]")]
+        [FindsBy(How = How.XPath, Using = @"//button[@type='submit']")]
         public IWebElement SearchButton;
 
         public void DoSearch(string text)
@@ -40,5 +41,6 @@ namespace Automation.PageObjects
         {
             return false;
         }
+
     }
 }
