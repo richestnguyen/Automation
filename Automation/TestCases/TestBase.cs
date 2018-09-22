@@ -12,7 +12,8 @@ namespace Automation.PageObjects
     public class TestBase
     {
         protected IWebDriver driver;
-        public string Url = "http://google.com/";
+        public string Url = "https://swappa.com/";
+
         [SetUp]
         public void SetUp()
         {
@@ -26,7 +27,7 @@ namespace Automation.PageObjects
         public void TearDown()
         {
             TestContext.Progress.WriteLine("Tear down!");
-            if (TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed)
+            if (TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed) 
             {
                 TestContext.Progress.WriteLine("Capture last screen:");
                 CaptureLastScreen();
@@ -35,6 +36,7 @@ namespace Automation.PageObjects
             TestContext.Progress.WriteLine("Driver Quit");
             driver.Quit();
             driver = null;
+
         }
 
         public void CaptureLastScreen()
@@ -46,7 +48,7 @@ namespace Automation.PageObjects
             }
 
             Bitmap printscreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            Graphics graphics = Graphics.FromImage((Image)printscreen);
+            Graphics graphics = Graphics.FromImage((Image) printscreen);
             graphics.CopyFromScreen(0, 0, 0, 0, printscreen.Size);
             printscreen.Save($"{failedTestDataFolder}{TestContext.CurrentContext.Test.Name}_LastScreen.jpg", ImageFormat.Jpeg);
         }
