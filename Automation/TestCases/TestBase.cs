@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 
 namespace Automation.PageObjects
 {
@@ -20,8 +19,8 @@ namespace Automation.PageObjects
         {
             TestContext.Progress.WriteLine("Driver Started");
             driver = new ChromeDriver();
-            driver.Url = Url;
-            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl(Url);
+            //driver.Manage().Window.Maximize();
         }
 
         [TearDown]
