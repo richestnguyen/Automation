@@ -51,7 +51,7 @@ namespace Automation.PageObjects
             Bitmap printscreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             Graphics graphics = Graphics.FromImage((Image) printscreen);
             graphics.CopyFromScreen(0, 0, 0, 0, printscreen.Size);
-            printscreen.Save($"{failedTestDataFolder}{TestContext.CurrentContext.Test.Name}_LastScreen.jpg", ImageFormat.Jpeg);
+            printscreen.Save($"{failedTestDataFolder}{TestContext.CurrentContext.Test.Name}{DateTime.UtcNow.ToString("yyyyMMdd HHmmss %K")}_LastScreen.jpg", ImageFormat.Jpeg);
         }
 
         public void LogStep(string stepName, string stepDescription)

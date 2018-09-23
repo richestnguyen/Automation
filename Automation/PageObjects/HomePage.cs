@@ -16,7 +16,7 @@ namespace Automation.PageObjects
         public HomePage(IWebDriver driver)
         {
             this.driver = driver;
-            PageFactory.InitElements(driver, this);
+            //PageFactory.InitElements(driver, this);
 
         }
 

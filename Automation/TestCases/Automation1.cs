@@ -8,16 +8,16 @@ namespace Automation.TestCases
         [Test]
         public void SearchText()
         {
-            LogStep("Step 1", "Go to Google");
+            LogStep("Step 1", "Go to SWAPPA");
             var home = new HomePage(driver);
 
-            LogStep("Step 2", "Search for \"Selenium\"");
-            home.DoSearch("Selenium");
-            home.TitleBarShouldBe("Selenium");
-            var resultPage = new ResultPage(driver);
+            LogStep("Step 2", "Search for \"Iphone X\"");
+            home.DoSearch("Iphone X");
+            //home.TitleBarShouldBe("Selenium");
+            //var resultPage = new ResultPage(driver);
 
-            LogStep("Step 3", "Click on 2nd link");
-            resultPage.ClickOnFirstResultLink(2);
+            //LogStep("Step 3", "Click on 2nd link");
+            //resultPage.ClickOnFirstResultLink(2);
         }
     }
 }
