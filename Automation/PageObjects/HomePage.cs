@@ -21,19 +21,17 @@ namespace Automation.PageObjects
         }
 
         [FindsBy(How = How.XPath, Using = @"//*[@id=""id_q""]")]
-        public IWebElement SearhTextBox;
+        public IWebElement SearchTextBox;
 
-        [FindsBy(How = How.XPath, Using = @"//button[@type='submit']")]
+        [FindsBy(How = How.XPath, Using = @"//*[@id=""header_search_form""]/div/div/span/button")]
         public IWebElement SearchButton;
 
         public void DoSearch(string text)
         {
             Actions action = new Actions(driver);
-            action.MoveToElement(SearhTextBox).Perform();
-            SearhTextBox.SlowTypingValue(text);
+            action.MoveToElement(SearchTextBox).Perform();
+            SearchTextBox.SlowTypingValue(text);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
-            action.SendKeys(Keys.Tab).Build().Perform();
-            action.MoveToElement(SearchButton).Perform();
             SearchButton.Click();
         }
 

@@ -1,7 +1,9 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Automation.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Automation
 {
@@ -16,8 +18,8 @@ namespace Automation
         public static void DoSearch(this HomePage t, string text)
         {
             Actions action  = new Actions(driver);
-            action.MoveToElement(t.SearhTextBox).Perform();
-            t.SearhTextBox.SendKeys(text);
+            action.MoveToElement(t.SearchTextBox).Perform();
+            t.SearchTextBox.SendKeys(text);
             Thread.Sleep(1000);
             action.MoveToElement(t.SearchButton).Perform();
             t.SearchButton.Click();
@@ -40,6 +42,16 @@ namespace Automation
                 t.SendKeys(c.ToString());
                 Thread.Sleep(speed);
             }
+        }
+
+        public static IWebElement WaitForElement(this IWebDriver t, By by, TimeSpan timeoutInSeconds)
+        {
+            if (timeoutInSeconds.Seconds > 0)
+            {
+                var wait = new WebDriverWait(t, TimeSpan.FromSeconds(timeoutInSeconds.Seconds));
+                return wait.Until(drv => drv.FindElement(by));
+            }
+            return t.FindElement(by);
         }
 
     }

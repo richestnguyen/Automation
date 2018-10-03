@@ -15,5 +15,10 @@ namespace Automation.PageObjects
     {
         public IWebDriver driver;
         public WebDriverWait wait;
+
+        public void ClickOnElementWhenClickable(IWebElement element)
+        {
+            element.Click();
+        }
     }
 }

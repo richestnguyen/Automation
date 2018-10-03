@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Support.UI;
 
 namespace Automation.PageObjects
 {
-    public class ResultPage
+    public class ResultPage : ScreenBase
     {
-
-        private IWebDriver driver;
 
         public ResultPage(IWebDriver driver)
         {
@@ -25,12 +25,33 @@ namespace Automation.PageObjects
         [FindsBy(How = How.XPath, Using = "//*[@id=\"rso\"]/div/div/div[2]/div/div/h3/a")]
         private IWebElement SecondResult;
 
-        public void ClickOnFirstResultLink(int index)
+        [FindsBy(How = How.PartialLinkText, Using = "Apple iPhone Xs (Unlocked)")]
+        private IWebElement ResultItems;
+        
+        public List<IWebElement> GetAllResult()
         {
-            string xpath = $"//*[@id=\"rso\"]/div/div/div[{index}]/div/div/h3/a";
-            driver.FindElement(By.XPath(xpath)).Click();
+            var resultText = driver.FindElement(By.XPath("//*[@id=\"section_top\"]/div/div[2]/h2")).Text;
+            var numberOfResult = resultText.Substring(0, resultText.IndexOf(" ", StringComparison.Ordinal));
+            var listElemnt = new List<IWebElement>();
+            WebDriverWait wait = new WebDriverWait(driver,new TimeSpan(30));
+            for (int i = 1; i <= int.Parse(numberOfResult); i++)
+            {
+                listElemnt.Add(wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector($"#wrap > div > section.section_main > div > div:nth-child({i}) > div > a.title"))));
+            }
+
+            return listElemnt;
         }
 
-
+        public void ClickOnResultLinkContainName(List<IWebElement> listElements, string itemName = null)
+        {
+            foreach (var element in listElements)
+            {
+                if (element.Text.StartsWith("Apple iPhone Xs") && !element.Text.Contains("Max") && element.Text.Contains("Unlocked"))
+                {
+                    element.Click();
+                    return;
+                }
+            }
+        }
     }
 }
